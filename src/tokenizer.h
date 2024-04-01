@@ -27,6 +27,7 @@ int non_space_char(char c){
    space-separated token in zero-terminated str.  Return a zero pointer if 
    str does not contain any tokens. */
 char *token_start(char *str){
+  for 
   if (non_space_char(str[0])){
     return char *p = *str;
   }
