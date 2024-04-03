@@ -3,17 +3,6 @@
 #include "history.h"
 #include "tokenizer.h"
 
-typedef struct s_Item {
-  int id;
-  char *str;
-  struct s_Item *next;
-} Item;
-
-typedef struct s_List {
-  struct s_Item *root;
-  int *size;
-} List;
-
 /* Initialize the linked list to keep the history. */
 List* init_history(){
   
@@ -22,7 +11,7 @@ List* init_history(){
   history->root=NULL;
   history->size=0;
   return history;
-} ;
+} 
 
 /* Add a history item to the end of the list.
    List* list - the linked list
@@ -48,7 +37,7 @@ void add_history(List *list, char *str){
       if(list->id
     }
   }
-};
+}
 
 /* Retrieve the string stored in the node where Item->id == id.
    List* list - the linked list

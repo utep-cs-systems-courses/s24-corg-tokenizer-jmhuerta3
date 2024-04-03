@@ -51,7 +51,7 @@ int count_tokens(char *str){
   char *token = token_start(str);
   
   while(token != NULL){
-    counter +=1;
+    count +=1;
 
     //goes to the end token and then points at the next token
     token = token_terminator(token);
@@ -104,7 +104,7 @@ char **tokenize(char* str){
   char* start = token_start(str);
   char *end;
   
-  for(int i =0;i<counter;i++){
+  for(int i =0;i<count;i++){
     //check if the token is NULL and break out of the for loop
     if(start == NULL){ break;}
 
