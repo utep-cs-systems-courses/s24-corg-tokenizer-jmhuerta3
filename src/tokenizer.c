@@ -71,7 +71,7 @@ char *copy_str(char *inStr, short len){
   //return if the str is NULL
   if(newStr ==NULL){return newStr;}
   
-  while(non_space(*inStr)){
+  while(non_space_char(*inStr)){
     newStr[i]=inStr[i];
     i++;
   }
@@ -103,8 +103,8 @@ char **tokenize(char* str){
   //pointers for the start and end of the tokens
   char* start = token_start(str);
   char *end;
-  
-  for(int i =0;i<count;i++){
+  int i;
+  for(i =0;i<count;i++){
     //check if the token is NULL and break out of the for loop
     if(start == NULL){ break;}
 
