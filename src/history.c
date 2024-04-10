@@ -28,14 +28,14 @@ void add_history(List *list, char *str){
   if (curr==NULL){
     new_Item->id=0;
     list->root = new_Item;
-    list->size +1;
+    // list->size +1;
   }
   else{
     while(curr->next != NULL){
       curr=curr->next;
     }
     curr->next=new_Item;
-    list->size+1;
+    // list->size+1;
     new_Item->id=curr ->id+1;    
   }
   
@@ -50,7 +50,7 @@ void add_history(List *list, char *str){
   }
 
   //reset the str pointer
-  str -=length;
+  str -=str_length;
 
   new_Item->str=str;
 }
@@ -78,15 +78,16 @@ char *get_history(List *list, int id){
 void print_history(List *list){
   Item *curr = list->root;
 
-  if(cur==NULL){
+  if(curr==NULL){
     printf("You have no history to be printed\n");
-    break;
   }
 
-  printf("This is your history so far:\n");
-  while(curr != NULL){
-    printf("%s\n", curr->str);
-    curr= curr->next;
+  else{
+     printf("This is your history so far:\n");
+     while(curr != NULL){
+       printf("%s\n", curr->str);
+       curr= curr->next;
+     }
   }
 }
 
@@ -102,5 +103,3 @@ void free_history(List *list){
   }
   free(list);
 }
-
-#endif
