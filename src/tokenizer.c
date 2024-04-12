@@ -37,7 +37,7 @@ char *token_start(char *str){
 
 /* Returns a pointer terminator char following *token */
 char *token_terminator(char *token){
-  while(non_space_char(*token)){
+  while(non_space_char(*token)&& *token != '\0'){
     token++;
   }
   return token;
@@ -64,16 +64,20 @@ int count_tokens(char *str){
    containing <len> chars from <inStr> */
 char *copy_str(char *inStr, short len){
   //allocating space for the new string that will be
-  //+1 the lenght of teh original str
-  char *newStr = (char *)malloc((len+1)*sizeof(char *));
+  //+1 the lenght of the original str
+  char *newStr = malloc((len+1)*sizeof(char));
   int i=0;
 
   //return if the str is NULL
-  if(newStr ==NULL){return newStr;}
-  
-  while(non_space_char(*inStr)){
+  if(newStr ==NULL){
+    printf("new str in copystr NULL %s\n", newStr);
+    return newStr;
+  }
+
+  for(i=0;i<len;i++){
     newStr[i]=inStr[i];
-    i++;
+    printf("print the copied string %c\n", newStr[i]);
+    printf("i in copy str %d\n", i);
   }
 
   //setting the end of our string to the zero termination/null
@@ -94,7 +98,8 @@ char *copy_str(char *inStr, short len){
 char **tokenize(char* str){
   //see how many tokens we need to store
   int count = count_tokens(str);
-
+  printf("%d\n",count);
+  
   //allocate space for the resulting array
   char **tokens = (char **)malloc((count+1)*sizeof(char *));
 
@@ -102,22 +107,28 @@ char **tokenize(char* str){
   
   //pointers for the start and end of the tokens
   char* start = token_start(str);
+  printf("start pointer  %c \n", *start);
   char *end;
-  int i;
-  for(i =0;i<count;i++){
+  int i=0;
+  for(i=0;i<count;i++){
+    
     //check if the token is NULL and break out of the for loop
     if(start == NULL){ break;}
 
     //point to the end of the token
     end = token_terminator(start);
-
+    printf("end pointer %c\n", *end);
     tokens[i]= copy_str(start,(end-start));
-
+    printf("token[i] %s\n", tokens[i]);
+    
     //restart the start pointer to look at the next token
     start = token_start(end);
+    printf("start pointer %c\n", *start);
+    printf("i %d\n", i);
     
   }
   tokens[i] = 0;
+  printf("last token[i]%s\n", tokens[i]);
   return tokens;
   
 }
