@@ -26,13 +26,20 @@ int non_space_char(char c){
    space-separated token in zero-terminated str.  Return a zero pointer if 
    str does not contain any tokens. */
 char *token_start(char *str){
-  while(space_char(*str) && *str != '\0'){
+  //  while(space_char(*str) && *str != '\0'){
+  // str++;
+  // }
+  // if (*str == '\0'){
+  // return NULL;
+  // }
+  // return str;
+  while(*str != '\0'){
+    if(non_space_char(*str)){
+      return str;//start of the next token
+    }
     str++;
   }
-  if (*str == '\0'){
-    return NULL;
-  }
-  return str;
+  return NULL;//if no more tokens are found 
 }
 
 /* Returns a pointer terminator char following *token */
@@ -74,7 +81,7 @@ char *copy_str(char *inStr, short len){
     return newStr;
   }
 
-  for(i=0;i<len;i++){
+  for(i=0;i<len && inStr[i] !='\0';i++){
     newStr[i]=inStr[i];
     printf("print the copied string %c\n", newStr[i]);
     printf("i in copy str %d\n", i);
@@ -110,25 +117,27 @@ char **tokenize(char* str){
   printf("start pointer  %c \n", *start);
   char *end;
   int i=0;
-  for(i=0;i<count;i++){
+  //  for(i=0;i<count;i++){
     
     //check if the token is NULL and break out of the for loop
-    if(start == NULL){ break;}
-
+  // if(start == NULL){ break;}
+  while(start !=NULL && *start != '\0'){
+    printf("current start pointer: %c\n", *start);
     //point to the end of the token
     end = token_terminator(start);
-    printf("end pointer %c\n", *end);
+    // printf("end pointer %c\n", *end);
     tokens[i]= copy_str(start,(end-start));
-    printf("token[i] %s\n", tokens[i]);
+    printf("token[%d] %s\n",i, tokens[i]);
     
     //restart the start pointer to look at the next token
     start = token_start(end);
-    printf("start pointer %c\n", *start);
-    printf("i %d\n", i);
+    printf("start pointer %c\n",(start !=NULL && *start != '\0') ?  *start:'\0');
+    // printf("i %d\n", i);
+    i++;
     
   }
-  tokens[i] = 0;
-  printf("last token[i]%s\n", tokens[i]);
+  tokens[i] =0; // 0;
+  printf("last token[%d]%s\n",i, tokens[i]);
   return tokens;
   
 }
